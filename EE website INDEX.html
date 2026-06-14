@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eli Elite Electric · Houston, TX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --navy: #0D1B2A; --navy-mid: #1A2E42; --gold: #C8962A; --gold-light: #E8B84B;
+    --cream: #F7F4EE; --cream-dark: #EDE9E0; --white: #FFFFFF;
+    --text-dark: #0D1B2A; --text-mid: #3A4E62; --text-muted: #6B7E92;
+    --border: rgba(13,27,42,0.12);
+    --serif: 'DM Serif Display', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif;
+    --radius: 4px; --radius-lg: 8px;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--sans); color: var(--text-dark); background: var(--white); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+
+  /* LANG SPLASH */
+  #lang-splash { position: fixed; inset: 0; z-index: 9999; background: var(--navy); display: flex; align-items: center; justify-content: center; transition: opacity 0.5s, visibility 0.5s; }
+  #lang-splash.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+  .splash-inner { text-align: center; max-width: 480px; padding: 2rem; }
+  .splash-bolt { width: 56px; height: 56px; background: var(--gold); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; margin: 0 auto 2rem; }
+  .splash-bolt svg { width: 28px; height: 28px; fill: var(--navy); }
+  .splash-title { font-family: var(--serif); font-size: 28px; color: var(--white); margin-bottom: .5rem; }
+  .splash-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 2.5rem; letter-spacing: 0.04em; }
+  .lang-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .lang-btn { padding: 18px 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-lg); background: rgba(255,255,255,0.05); cursor: pointer; transition: all 0.2s; text-align: left; }
+  .lang-btn:hover { background: rgba(200,150,42,0.15); border-color: var(--gold); }
+  .lang-btn-flag { font-size: 28px; display: block; margin-bottom: 8px; }
+  .lang-btn-name { font-family: var(--serif); font-size: 20px; color: var(--white); display: block; margin-bottom: 2px; }
+  .lang-btn-native { font-size: 13px; color: rgba(255,255,255,0.4); }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 5vw; height: 68px; background: rgba(255,255,255,0.96); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); }
+  .logo { font-family: var(--serif); font-size: 20px; color: var(--navy); letter-spacing: .01em; display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .logo-bolt { width: 28px; height: 28px; background: var(--navy); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .logo-bolt svg { width: 14px; height: 14px; fill: var(--gold); }
+  .nav-links { display: flex; align-items: center; gap: 1.75rem; list-style: none; }
+  .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; letter-spacing: .02em; transition: color .2s; }
+  .nav-links a:hover { color: var(--navy); }
+  .nav-cta { background: var(--navy) !important; color: var(--white) !important; padding: 9px 20px; border-radius: var(--radius); font-weight: 500 !important; font-size: 14px !important; transition: background .2s !important; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+  .lang-toggle { display: flex; align-items: center; gap: 6px; background: var(--cream); border: 1px solid var(--cream-dark); border-radius: 20px; padding: 4px; cursor: pointer; transition: all .2s; }
+  .lang-toggle:hover { border-color: var(--gold); }
+  .lang-pill { padding: 4px 12px; border-radius: 16px; transition: all .2s; font-size: 12px; font-weight: 500; letter-spacing: .03em; }
+  .lang-pill.active { background: var(--navy); color: var(--white); }
+  .lang-pill:not(.active) { color: var(--text-muted); }
+
+  /* HERO */
+  #hero { padding-top: 68px; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; background: var(--navy); overflow: hidden; }
+  .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8vw 5vw 8vw 8vw; }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; margin-bottom: 2rem; }
+  .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero-h1 { font-family: var(--serif); font-size: clamp(36px,5vw,66px); line-height: 1.05; color: var(--white); margin-bottom: 1.5rem; }
+  .hero-h1 em { color: var(--gold); font-style: italic; }
+  .hero-sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.6); max-width: 400px; line-height: 1.7; margin-bottom: 2.5rem; }
+  .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary { background: var(--gold); color: var(--navy); font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 14px 28px; border: none; border-radius: var(--radius); cursor: pointer; text-decoration: none; letter-spacing: .02em; transition: background .2s, transform .15s; display: inline-block; }
+  .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
+  .btn-outline { background: transparent; color: rgba(255,255,255,0.75); font-family: var(--sans); font-size: 14px; font-weight: 400; padding: 13px 28px; border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius); cursor: pointer; text-decoration: none; letter-spacing: .02em; transition: border-color .2s, color .2s; display: inline-block; }
+  .btn-outline:hover { border-color: rgba(255,255,255,.5); color: var(--white); }
+  .hero-stats { margin-top: 4rem; display: flex; gap: 2.5rem; padding-top: 2.5rem; border-top: 1px solid rgba(255,255,255,.1); }
+  .stat-num { font-family: var(--serif); font-size: 32px; color: var(--white); line-height: 1; }
+  .stat-label { font-size: 12px; font-weight: 400; color: rgba(255,255,255,.45); letter-spacing: .05em; margin-top: 4px; }
+  .hero-right { position: relative; background: var(--navy-mid); overflow: hidden; display: flex; align-items: center; justify-content: center; }
+  .hero-visual { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 4rem; }
+  .circuit-svg { width: 100%; max-width: 400px; opacity: .25; }
+  .hero-badge { position: absolute; bottom: 3rem; right: 3rem; background: var(--gold); color: var(--navy); border-radius: 50%; width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 11px; font-weight: 500; line-height: 1.3; letter-spacing: .03em; }
+  .hero-badge strong { font-family: var(--serif); font-size: 22px; display: block; margin-bottom: 2px; font-weight: 400; }
+
+  /* TRUST BAR */
+  .trust-bar { background: var(--cream); padding: 1.5rem 8vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--cream-dark); }
+  .trust-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 400; color: var(--text-mid); }
+  .trust-icon { width: 30px; height: 30px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .trust-icon svg { width: 14px; height: 14px; fill: var(--gold); }
+
+  /* SECTIONS */
+  .section { padding: 7rem 8vw; }
+  .section-alt { background: var(--cream); }
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 1rem; }
+  .section-label::before { content: ''; display: block; width: 20px; height: 1px; background: var(--gold); }
+  .section-h2 { font-family: var(--serif); font-size: clamp(28px,3.5vw,48px); line-height: 1.1; color: var(--navy); margin-bottom: 1rem; }
+  .section-sub { font-size: 16px; font-weight: 300; color: var(--text-muted); max-width: 500px; line-height: 1.7; }
+  .section-header { margin-bottom: 4rem; }
+
+  /* SERVICES */
+  #services .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5px; background: var(--border); border: 1.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .service-card { background: var(--white); padding: 2rem 1.75rem; transition: background .2s; cursor: default; }
+  .service-card:hover { background: var(--navy); }
+  .service-card:hover .service-title { color: var(--white); }
+  .service-card:hover .service-desc { color: rgba(255,255,255,.5); }
+  .service-card:hover .service-num { color: rgba(255,255,255,.15); }
+  .service-card:hover .s-icon { background: rgba(200,150,42,.15); }
+  .service-card:hover .s-icon svg { fill: var(--gold); }
+  .service-num { font-family: var(--serif); font-size: 12px; color: var(--cream-dark); margin-bottom: 1.25rem; letter-spacing: .05em; transition: color .2s; }
+  .s-icon { width: 44px; height: 44px; background: var(--cream); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; transition: background .2s; }
+  .s-icon svg { width: 20px; height: 20px; fill: var(--navy); transition: fill .2s; }
+  .service-title { font-family: var(--serif); font-size: 20px; color: var(--navy); margin-bottom: .6rem; transition: color .2s; }
+  .service-desc { font-size: 14px; font-weight: 300; color: var(--text-muted); line-height: 1.65; transition: color .2s; }
+
+  /* ABOUT */
+  #about .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6vw; align-items: center; }
+  .about-img-wrap { position: relative; aspect-ratio: 4/5; border-radius: var(--radius-lg); overflow: hidden; display: flex; align-items: center; justify-content: center; background: var(--navy-mid); }
+  .about-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .about-img-placeholder { display: flex; flex-direction: column; align-items: center; gap: 1rem; color: rgba(255,255,255,.2); }
+  .about-img-placeholder svg { width: 48px; height: 48px; fill: rgba(255,255,255,.15); }
+  .about-img-placeholder span { font-size: 12px; letter-spacing: .08em; }
+  .about-accent { position: absolute; bottom: -1px; left: 0; right: 0; height: 6px; background: var(--gold); }
+  .about-list { margin: 2rem 0; list-style: none; display: flex; flex-direction: column; gap: 1rem; }
+  .about-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-mid); line-height: 1.5; }
+  .check { width: 20px; height: 20px; flex-shrink: 0; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
+  .check svg { width: 10px; height: 10px; fill: var(--navy); }
+
+  /* GALLERY */
+  #gallery .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 220px 220px; gap: 12px; }
+  .gal-item { border-radius: var(--radius-lg); overflow: hidden; position: relative; cursor: pointer; display: flex; align-items: center; justify-content: center; background: var(--navy-mid); }
+  .gal-item:first-child { grid-column: 1 / 3; }
+  .gal-item:nth-child(4) { grid-column: 2 / 4; }
+  .gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
+  .gal-item:hover img { transform: scale(1.04); }
+  .gal-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,27,42,.8) 0%, transparent 60%); opacity: 0; transition: opacity .3s; display: flex; align-items: flex-end; padding: 1.25rem; }
+  .gal-item:hover .gal-overlay { opacity: 1; }
+  .gal-label { font-size: 13px; font-weight: 500; color: var(--white); letter-spacing: .03em; }
+  .gal-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,.15); }
+  .gal-placeholder svg { width: 36px; height: 36px; fill: rgba(255,255,255,.12); }
+  .gal-placeholder span { font-size: 11px; letter-spacing: .06em; text-align: center; padding: 0 1rem; }
+
+  /* CONTACT */
+  #contact .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 6vw; align-items: start; }
+  .contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 1.75rem; }
+  .c-icon { width: 40px; height: 40px; flex-shrink: 0; background: var(--navy); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
+  .c-icon svg { width: 18px; height: 18px; fill: var(--gold); }
+  .c-label { font-size: 11px; font-weight: 500; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
+  .c-value { font-size: 15px; color: var(--text-dark); font-weight: 400; }
+  .contact-form { background: var(--navy); border-radius: var(--radius-lg); padding: 2.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+  .form-group label { font-size: 12px; font-weight: 500; color: rgba(255,255,255,.5); letter-spacing: .06em; text-transform: uppercase; }
+  .form-group input, .form-group select, .form-group textarea { background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.12); border-radius: var(--radius); padding: 11px 14px; font-family: var(--sans); font-size: 14px; color: var(--white); outline: none; transition: border-color .2s; -webkit-appearance: none; }
+  .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,.2); }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
+  .form-group select option { background: var(--navy); color: var(--white); }
+  .form-group textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
+  .form-submit { width: 100%; background: var(--gold); color: var(--navy); font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 13px; border: none; border-radius: var(--radius); cursor: pointer; letter-spacing: .03em; transition: background .2s; margin-top: 8px; }
+  .form-submit:hover { background: var(--gold-light); }
+  .whatsapp-btn { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 12px 20px; border-radius: var(--radius); text-decoration: none; margin-top: 1rem; transition: background .2s; width: fit-content; }
+  .whatsapp-btn:hover { background: #1ebe5a; }
+  .whatsapp-btn svg { width: 20px; height: 20px; fill: white; flex-shrink: 0; }
+
+  /* FOOTER */
+  footer { background: var(--navy); padding: 3rem 8vw 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1.5rem; border-top: 1px solid rgba(255,255,255,.06); }
+  .footer-logo { font-family: var(--serif); font-size: 18px; color: var(--white); }
+  .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; }
+  .footer-links a:hover { color: var(--gold); }
+
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .hero-tag   { animation: fadeUp .6s ease both; }
+  .hero-h1    { animation: fadeUp .6s .1s ease both; }
+  .hero-sub   { animation: fadeUp .6s .2s ease both; }
+  .hero-actions { animation: fadeUp .6s .3s ease both; }
+  .hero-stats { animation: fadeUp .6s .4s ease both; }
+</style>
+</head>
+<body>
+
+<!-- ================================================
+     LANGUAGE SPLASH
+     Nothing to change here — buttons trigger setLang()
+     ================================================ -->
+<div id="lang-splash">
+  <div class="splash-inner">
+    <div class="splash-bolt">
+      <svg viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/></svg>
+    </div>
+    <div class="splash-title">Eli Elite Electric</div>
+    <div class="splash-sub">Houston, TX · Licensed &amp; Insured</div>
+    <div class="lang-btns">
+      <button class="lang-btn" onclick="setLang('en')">
+        <span class="lang-btn-flag">🇺🇸</span>
+        <span class="lang-btn-name">English</span>
+        <span class="lang-btn-native">Continue in English</span>
+      </button>
+      <button class="lang-btn" onclick="setLang('es')">
+        <span class="lang-btn-flag">🇲🇽</span>
+        <span class="lang-btn-name">Español</span>
+        <span class="lang-btn-native">Continuar en Español</span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ================================================
+     NAV
+     ================================================ -->
+<nav>
+  <a class="logo" href="#hero">
+    <div class="logo-bolt">
+      <svg viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/></svg>
+    </div>
+    Eli Elite Electric
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services" data-en="Services"  data-es="Servicios">Services</a></li>
+    <li><a href="#about"    data-en="About"     data-es="Nosotros">About</a></li>
+    <li><a href="#gallery"  data-en="Gallery"   data-es="Galería">Gallery</a></li>
+    <li>
+      <div class="lang-toggle" onclick="toggleLang()">
+        <span class="lang-pill active" id="pill-en">EN</span>
+        <span class="lang-pill"        id="pill-es">ES</span>
+      </div>
+    </li>
+    <li><a href="#contact" class="nav-cta" data-en="Get a Quote" data-es="Cotización">Get a Quote</a></li>
+  </ul>
+</nav>
+
+<!-- ================================================
+     HERO
+     REPLACE 7+ with real years + project count
+     REPLACE right side SVG with a real job photo once available
+     ================================================ -->
+<section id="hero">
+  <div class="hero-left">
+    <div class="hero-tag"
+         data-en="Licensed &amp; Insured · Houston, TX"
+         data-es="Con Licencia y Seguro · Houston, TX">
+      Licensed &amp; Insured · Houston, TX
+    </div>
+    <h1 class="hero-h1">
+      <span data-en="Precision work.<br><em>Every circuit.</em><br>Every time."
+            data-es="Trabajo preciso.<br><em>Cada circuito.</em><br>Cada vez.">
+        Precision work.<br><em>Every circuit.</em><br>Every time.
+      </span>
+    </h1>
+    <p class="hero-sub"
+       data-en="Residential and commercial electrical services done right. Eli Elite Electric brings expertise, reliability, and a clean finish to every job."
+       data-es="Servicios eléctricos residenciales y comerciales hechos como se debe. Eli Elite Electric aporta experiencia, confiabilidad y un acabado impecable en cada trabajo.">
+      Residential and commercial electrical services done right. Eli Elite Electric brings expertise, reliability, and a clean finish to every job.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary" data-en="Request a Quote" data-es="Solicitar Cotización">Request a Quote</a>
+      <a href="#services" class="btn-outline" data-en="View Services"  data-es="Ver Servicios">View Services</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">7+</div>
+        <div class="stat-label" data-en="Years experience" data-es="Años de experiencia">Years experience</div>
+      </div>
+      <div>
+        <div class="stat-num">1000+</div>
+        <div class="stat-label" data-en="Projects completed" data-es="Proyectos completados">Projects completed</div>
+      </div>
+      <div>
+        <div class="stat-num">100%</div>
+        <div class="stat-label" data-en="Licensed &amp; insured" data-es="Con licencia y seguro">Licensed &amp; insured</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="hero-visual">
+      <!--
+        REPLACE THIS WHOLE SVG BLOCK with a real photo:
+        <img src="images/hero-photo.jpg" alt="Eli Elite Electric" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        Save the photo as: images/hero-photo.jpg
+      -->
+      <svg class="circuit-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+        <line x1="20" y1="200" x2="100" y2="200" stroke="white" stroke-width="2"/>
+        <line x1="100" y1="200" x2="100" y2="120" stroke="white" stroke-width="2"/>
+        <line x1="100" y1="120" x2="200" y2="120" stroke="white" stroke-width="2"/>
+        <line x1="200" y1="120" x2="200" y2="60"  stroke="white" stroke-width="2"/>
+        <line x1="200" y1="60"  x2="320" y2="60"  stroke="white" stroke-width="2"/>
+        <line x1="320" y1="60"  x2="320" y2="160" stroke="white" stroke-width="2"/>
+        <line x1="320" y1="160" x2="380" y2="160" stroke="white" stroke-width="2"/>
+        <line x1="160" y1="200" x2="260" y2="200" stroke="white" stroke-width="2"/>
+        <line x1="260" y1="200" x2="260" y2="280" stroke="white" stroke-width="2"/>
+        <line x1="260" y1="280" x2="380" y2="280" stroke="white" stroke-width="2"/>
+        <line x1="100" y1="280" x2="160" y2="280" stroke="white" stroke-width="2"/>
+        <line x1="160" y1="280" x2="160" y2="340" stroke="white" stroke-width="2"/>
+        <line x1="160" y1="340" x2="320" y2="340" stroke="white" stroke-width="2"/>
+        <line x1="320" y1="340" x2="320" y2="280" stroke="white" stroke-width="2"/>
+        <line x1="20"  y1="200" x2="20"  y2="340" stroke="white" stroke-width="2"/>
+        <line x1="20"  y1="340" x2="100" y2="340" stroke="white" stroke-width="2"/>
+        <line x1="100" y1="340" x2="100" y2="280" stroke="white" stroke-width="2"/>
+        <circle cx="100" cy="200" r="5" fill="white"/>
+        <circle cx="200" cy="120" r="5" fill="white"/>
+        <circle cx="320" cy="160" r="7" fill="#C8962A"/>
+        <circle cx="260" cy="200" r="5" fill="white"/>
+        <circle cx="160" cy="280" r="5" fill="white"/>
+        <circle cx="320" cy="280" r="5" fill="white"/>
+        <circle cx="100" cy="280" r="7" fill="#C8962A"/>
+        <circle cx="260" cy="280" r="5" fill="white"/>
+        <rect x="150" y="170" width="60" height="40" rx="3" fill="none" stroke="white" stroke-width="1.5"/>
+        <line x1="160" y1="170" x2="160" y2="165" stroke="white" stroke-width="1.5"/>
+        <line x1="175" y1="170" x2="175" y2="165" stroke="white" stroke-width="1.5"/>
+        <line x1="190" y1="170" x2="190" y2="165" stroke="white" stroke-width="1.5"/>
+        <line x1="160" y1="210" x2="160" y2="215" stroke="white" stroke-width="1.5"/>
+        <line x1="175" y1="210" x2="175" y2="215" stroke="white" stroke-width="1.5"/>
+        <line x1="190" y1="210" x2="190" y2="215" stroke="white" stroke-width="1.5"/>
+        <text x="180" y="194" fill="white" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.5">MCU</text>
+        <path d="M200 160 L192 185 H200 L190 210 L210 180 H202 Z" fill="#C8962A" opacity="0.9"/>
+      </svg>
+    </div>
+    <!-- REPLACE star rating once he has real Google reviews to back it up -->
+    <div class="hero-badge">
+      <strong>5★</strong>
+      <span data-en="Rated &amp; Reviewed" data-es="Calificado y Revisado">Rated &amp; Reviewed</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     TRUST BAR
+     REPLACE TDLR license number when you have it
+     ================================================ -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.25 3.75 10.15 9 11.35C17.25 22.15 21 17.25 21 12V7L12 2z"/></svg></div>
+    <span data-en="Licensed &amp; fully insured" data-es="Con licencia y seguro">Licensed &amp; fully insured</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14l-4-4 1.41-1.41L11 13.17l6.59-6.59L19 8l-8 8z"/></svg></div>
+
+    <span data-en="TDLR Certified · Lic. #550184" data-es="Certificado TDLR · Lic. #550184">TDLR Certified · Lic. #550184</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 10.99h7c-.53 4.12-3.28 7.79-7 8.94V12H5V6.3l7-3.11v8.8z"/></svg></div>
+    <span data-en="Residential &amp; Commercial" data-es="Residencial y Comercial">Residential &amp; Commercial</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M17 12h-5v5h5v-5zM16 1v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2h-1V1h-2zm3 18H5V8h14v11z"/></svg></div>
+    <span data-en="Available Every Afternoon, 7 Days" data-es="Disponible Todas las Tardes, 7 Días">Available Every Afternoon, 7 Days</span>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
+    <span data-en="Fast Turnaround, No Delays" data-es="Entrega Rápida, Sin Demoras">Fast Turnaround, No Delays</span>
+  </div>
+</div>
+
+<!-- ================================================
+     SERVICES
+     Add/remove .service-card blocks to match his real offerings
+     ================================================ -->
+<section id="services" class="section">
+  <div class="section-header">
+    <div class="section-label" data-en="What we do" data-es="Lo que hacemos">What we do</div>
+    <h2 class="section-h2" data-en="Services built for homes and businesses" data-es="Servicios para hogares y negocios">Services built for<br>homes and businesses</h2>
+    <p class="section-sub"
+       data-en="From simple repairs to full commercial builds — Eli Elite Electric handles it all with the same level of care and precision."
+       data-es="Desde reparaciones simples hasta instalaciones comerciales completas — Eli Elite Electric lo maneja todo con el mismo nivel de cuidado y precisión.">
+      From simple repairs to full commercial builds — Eli Elite Electric handles it all with the same level of care and precision.
+    </p>
+  </div>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <div class="service-num">01</div>
+      <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg></div>
+      <div class="service-title" data-en="Residential Wiring"  data-es="Cableado Residencial">Residential Wiring</div>
+      <p class="service-desc"
+         data-en="New construction, rewiring, panel upgrades, and outlet installations for your home — done safely and to code."
+         data-es="Construcción nueva, recableado, actualizaciones de tableros e instalación de tomacorrientes — seguro y conforme al código.">
+        New construction, rewiring, panel upgrades, and outlet installations for your home — done safely and to code.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">02</div>
+      <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8v-2h2v-2h-2v-2h2v-2h-2V9h8v10zm-2-8h-2v2h2v-2zm0 4h-2v2h2v-2z"/></svg></div>
+      <div class="service-title" data-en="Commercial Electrical" data-es="Eléctrico Comercial">Commercial Electrical</div>
+      <p class="service-desc"
+         data-en="Office buildouts, retail spaces, warehouses, and multi-unit properties — on schedule and fully code-compliant."
+         data-es="Oficinas, locales comerciales, bodegas y propiedades de múltiples unidades — a tiempo y cumpliendo el código.">
+        Office buildouts, retail spaces, warehouses, and multi-unit properties — on schedule and fully code-compliant.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">03</div>
+      <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z"/></svg></div>
+      <div class="service-title" data-en="Panel Upgrades" data-es="Actualización de Tableros">Panel Upgrades</div>
+      <p class="service-desc"
+         data-en="Outdated breaker panels replaced with modern 200A+ service panels — essential for safety and capacity."
+         data-es="Tableros obsoletos reemplazados por paneles modernos de 200A o más — esencial para la seguridad y la capacidad.">
+        Outdated breaker panels replaced with modern 200A+ service panels — essential for safety and capacity.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">04</div>
+      <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/></svg></div>
+      <div class="service-title" data-en="EV Charger Installation" data-es="Instalación de Cargadores EV">EV Charger Installation</div>
+      <p class="service-desc"
+         data-en="Level 2 home and commercial EV charging stations installed properly with the correct amperage and permits."
+         data-es="Estaciones de carga EV Nivel 2 para casa y negocio, instaladas correctamente con el amperaje y permisos adecuados.">
+        Level 2 home and commercial EV charging stations installed properly with the correct amperage and permits.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">05</div>
+      <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v2H5z"/></svg></div>
+      <div class="service-title" data-en="Lighting &amp; Fixtures" data-es="Iluminación y Accesorios">Lighting &amp; Fixtures</div>
+      <p class="service-desc"
+         data-en="Recessed lighting, chandeliers, outdoor security lighting — complete installations with a clean, professional finish."
+         data-es="Iluminación empotrada, candiles, iluminación exterior de seguridad — instalaciones completas con acabado profesional.">
+        Recessed lighting, chandeliers, outdoor security lighting — complete installations with a clean, professional finish.
+      </p>
+    </div>
+
+    <div class="service-card">
+      <div class="service-num">06</div>
+      <div class="s-icon"><svg viewBox="0 0 24 24"><path d="M15.67 4H14V2h-4v2H8.33C7.6 4 7 4.6 7 5.33v15.33C7 21.4 7.6 22 8.33 22h7.33c.74 0 1.34-.6 1.34-1.33V5.33C17 4.6 16.4 4 15.67 4zM13 18h-2v-2h2v2zm0-4h-2V9h2v5z"/></svg></div>
+      <div class="service-title" data-en="Troubleshooting &amp; Repair" data-es="Diagnóstico y Reparación">Troubleshooting &amp; Repair</div>
+      <p class="service-desc"
+         data-en="Tripping breakers, dead outlets, flickering lights — fast diagnosis and reliable fixes, same day when possible."
+         data-es="Interruptores disparados, tomacorrientes sin corriente, luces parpadeantes — diagnóstico rápido y soluciones confiables, mismo día cuando es posible.">
+        Tripping breakers, dead outlets, flickering lights — fast diagnosis and reliable fixes, same day when possible.
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================
+     ABOUT
+     REPLACE: photo, bio paragraphs, years, warranty length
+     ================================================ -->
+<section id="about" class="section section-alt">
+  <div class="about-grid">
+    <div class="about-img-wrap">
+      <!--
+        REPLACE THIS BLOCK with his photo once you have it.
+        Drop the file into the images/ folder and swap in:
+          <img src="images/about-photo.jpg" alt="(His first name), Eli Elite Electric">
+        Then delete the div.about-img-placeholder below.
+      -->
+      <div class="about-img-placeholder">
+        <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        <span>PHOTO OF ANTONIO HERE</span>
+      </div>
+      <div class="about-accent"></div>
+    </div>
+
+    <div class="about-text">
+      <div class="section-label" data-en="About" data-es="Nosotros">About</div>
+      <!-- REPLACE: headline can be more personal if he wants -->
+      <h2 class="section-h2"
+          data-en="Electricians who take pride in their craft"
+          data-es="Electricistas que se enorgullecen de su trabajo">
+        Electricians who take pride in their craft
+      </h2>
+      <!-- REPLACE: swap both paragraphs with his actual story -->
+      <p style="font-size:16px;font-weight:300;color:var(--text-muted);line-height:1.75;margin:1rem 0"
+         data-en="Eli Elite Electric was built on a simple mission: to completely change the standards of the electrical field. That means clean, concentric, consistent work — done efficiently, done professionally, and done at a price that doesn't exclude the people who need it most."
+         data-es="Eli Elite Electric fue fundada con una misión simple: cambiar completamente los estándares del campo eléctrico. Eso significa trabajo limpio, concéntrico y consistente — hecho de manera eficiente, profesional y a un precio que no excluye a quienes más lo necesitan.">
+        Eli Elite Electric was built on a simple mission: to completely change the standards of the electrical field. That means clean, concentric, consistent work — done efficiently, done professionally, and done at a price that doesn't exclude the people who need it most.
+      </p>
+      <p style="font-size:16px;font-weight:300;color:var(--text-muted);line-height:1.75"
+         data-en="We're not here to just do a job and move on. We want every customer to feel genuinely blessed by the experience — the kind of quality that speaks for itself, backed by 7 years of hands-on work across Houston."
+         data-es="No estamos aquí solo para hacer un trabajo y seguir adelante. Queremos que cada cliente se sienta genuinamente bendecido por la experiencia — el tipo de calidad que habla por sí sola, respaldada por 7 años de trabajo práctico en Houston.">
+        We're not here to just do a job and move on. We want every customer to feel genuinely blessed by the experience — the kind of quality that speaks for itself, backed by 7 years of hands-on work across Houston.
+      </p>
+
+      <ul class="about-list">
+        <li>
+          <div class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+          <span data-en="All work permitted and inspected when required" data-es="Todo el trabajo con permisos e inspección cuando se requiere">All work permitted and inspected when required</span>
+        </li>
+        <li>
+          <div class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+          <span data-en="Free written estimates — no surprise charges" data-es="Presupuestos escritos gratis — sin cargos sorpresa">Free written estimates — no surprise charges</span>
+        </li>
+        <li>
+          <div class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+          <!-- REPLACE (X) with his actual warranty period -->
+          <span data-en="A dedicated crew — not a solo op, not a contractor lottery" data-es="Un equipo dedicado — no un solo operario, no una lotería de contratistas">A dedicated crew — not a solo op, not a contractor lottery</span>
+        </li>
+        <li>
+          <div class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
+          <span data-en="Serving residential and commercial clients across the Houston metro" data-es="Atendemos clientes residenciales y comerciales en toda el área metropolitana de Houston">Serving residential and commercial clients across the Houston metro</span>
+        </li>
+      </ul>
+
+      <a href="#contact" class="btn-primary" style="color:var(--navy)"
+         data-en="Work with us" data-es="Trabaja con nosotros">Work with us</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     GALLERY
+     REPLACE each placeholder block with a real photo:
+       <img src="images/gallery-1.jpg" alt="(short job description)">
+     Name photos: gallery-1.jpg through gallery-5.jpg
+     Update gal-label text to match each photo
+     ================================================ -->
+<section id="gallery" class="section">
+  <div class="section-header">
+    <div class="section-label" data-en="Our work" data-es="Nuestro trabajo">Our work</div>
+    <h2 class="section-h2"
+        data-en="Clean installs, clean results"
+        data-es="Instalaciones limpias, resultados limpios">
+      Clean installs,<br>clean results
+    </h2>
+    <p class="section-sub"
+       data-en="A look at some of the residential and commercial projects we've completed across Houston."
+       data-es="Un vistazo a algunos de los proyectos residenciales y comerciales que hemos completado en Houston.">
+      A look at some of the residential and commercial projects we've completed across Houston.
+    </p>
+  </div>
+
+  <div class="gallery-grid">
+
+    <div class="gal-item"><!-- spans 2 columns — use a wide/landscape photo here -->
+      <div class="gal-placeholder">
+        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <span>(PHOTO 1 — panel upgrade or big job, landscape works best here)</span>
+      </div>
+      <div class="gal-overlay">
+        <div class="gal-label" data-en="(Job type — Neighborhood, Houston)" data-es="(Tipo de trabajo — Vecindario, Houston)">(Job type — Neighborhood, Houston)</div>
+      </div>
+    </div>
+
+    <div class="gal-item">
+      <div class="gal-placeholder">
+        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <span>(PHOTO 2 — commercial wiring or outlet work)</span>
+      </div>
+      <div class="gal-overlay">
+        <div class="gal-label" data-en="(Job type — Neighborhood, Houston)" data-es="(Tipo de trabajo — Vecindario, Houston)">(Job type — Neighborhood, Houston)</div>
+      </div>
+    </div>
+
+    <div class="gal-item">
+      <div class="gal-placeholder">
+        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <span>(PHOTO 3 — lighting install)</span>
+      </div>
+      <div class="gal-overlay">
+        <div class="gal-label" data-en="(Job type — Neighborhood, Houston)" data-es="(Tipo de trabajo — Vecindario, Houston)">(Job type — Neighborhood, Houston)</div>
+      </div>
+    </div>
+
+    <div class="gal-item"><!-- spans 2 columns — use a wide/landscape photo here -->
+      <div class="gal-placeholder">
+        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <span>(PHOTO 4 — EV charger or outdoor work, landscape works best here)</span>
+      </div>
+      <div class="gal-overlay">
+        <div class="gal-label" data-en="(Job type — Neighborhood, Houston)" data-es="(Tipo de trabajo — Vecindario, Houston)">(Job type — Neighborhood, Houston)</div>
+      </div>
+    </div>
+
+    <div class="gal-item">
+      <div class="gal-placeholder">
+        <svg viewBox="0 0 24 24"><path d="M21 19V5c0-1.1-.9-2-2-2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2zM8.5 13.5l2.5 3.01L14.5 12l4.5 6H5l3.5-4.5z"/></svg>
+        <span>(PHOTO 5 — any completed job)</span>
+      </div>
+      <div class="gal-overlay">
+        <div class="gal-label" data-en="(Job type — Neighborhood, Houston)" data-es="(Tipo de trabajo — Vecindario, Houston)">(Job type — Neighborhood, Houston)</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ================================================
+     CONTACT
+     REPLACE: phone, email, hours, WhatsApp number
+     WhatsApp href format: https://wa.me/18325232994 (country code + number, no dashes)
+     ================================================ -->
+<section id="contact" class="section section-alt">
+  <div class="section-header">
+    <div class="section-label" data-en="Get in touch" data-es="Contáctanos">Get in touch</div>
+    <h2 class="section-h2" data-en="Ready to get started?" data-es="¿Listo para comenzar?">Ready to get started?</h2>
+    <p class="section-sub"
+       data-en="Fill out the form and we'll get back to you within 24 hours with a free estimate."
+       data-es="Llena el formulario y te responderemos en menos de 24 horas con un presupuesto gratis.">
+      Fill out the form and we'll get back to you within 24 hours with a free estimate.
+    </p>
+  </div>
+
+  <div class="contact-grid">
+    <div>
+      <div class="contact-detail">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
+        <div>
+          <div class="c-label" data-en="Phone" data-es="Teléfono">Phone</div>
+          <div class="c-value">(832) 523-2994</div><!-- REPLACE -->
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
+        <div>
+          <div class="c-label">Email</div>
+          <div class="c-value">elieliteelectric@gmail.com</div><!-- REPLACE -->
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg></div>
+        <div>
+          <div class="c-label" data-en="Service Area" data-es="Área de Servicio">Service Area</div>
+          <div class="c-value" data-en="Houston &amp; surrounding metro" data-es="Houston y área metropolitana">Houston &amp; surrounding metro</div>
+        </div>
+      </div>
+      <div class="contact-detail">
+        <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67V7z"/></svg></div>
+        <div>
+          <div class="c-label" data-en="Hours" data-es="Horario">Hours</div>
+          <!-- REPLACE with real hours -->
+          <div class="c-value" data-en="Available every afternoon · 7 days a week" data-es="Disponible todas las tardes · 7 días a la semana">Available every afternoon · 7 days a week</div>
+        </div>
+      </div>
+
+      <!-- REPLACE href number: wa.me/1 + his 10-digit phone, no dashes -->
+      <a class="whatsapp-btn" href="https://wa.me/18325232994" target="_blank">
+        <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span data-en="Text or WhatsApp us" data-es="Escríbenos por WhatsApp">Text or WhatsApp us</span>
+      </a>
+    </div>
+
+    <div class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label data-en="First name" data-es="Nombre">First name</label>
+          <input type="text" id="fn-ph" placeholder="John">
+        </div>
+        <div class="form-group">
+          <label data-en="Last name" data-es="Apellido">Last name</label>
+          <input type="text" id="ln-ph" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-en="Phone" data-es="Teléfono">Phone</label>
+          <input type="tel" placeholder="(713) 000-0000">
+        </div>
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com">
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-en="Service needed" data-es="Servicio requerido">Service needed</label>
+        <select id="service-select">
+          <option data-en="Select a service..." data-es="Selecciona un servicio...">Select a service...</option>
+          <option data-en="Residential Wiring"        data-es="Cableado Residencial">Residential Wiring</option>
+          <option data-en="Commercial Electrical"     data-es="Eléctrico Comercial">Commercial Electrical</option>
+          <option data-en="Panel Upgrade"             data-es="Actualización de Tablero">Panel Upgrade</option>
+          <option data-en="EV Charger Installation"   data-es="Instalación de Cargador EV">EV Charger Installation</option>
+          <option data-en="Lighting &amp; Fixtures"   data-es="Iluminación y Accesorios">Lighting &amp; Fixtures</option>
+          <option data-en="Troubleshooting &amp; Repair" data-es="Diagnóstico y Reparación">Troubleshooting &amp; Repair</option>
+          <option data-en="Other" data-es="Otro">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-en="Tell us about your project" data-es="Cuéntanos sobre tu proyecto">Tell us about your project</label>
+        <textarea id="ta-ph" placeholder="Describe what you need — location, scope, any urgency..."></textarea>
+      </div>
+      <button class="form-submit" id="submit-btn"
+        data-en="Send Message" data-es="Enviar Mensaje"
+        onclick="this.textContent=currentLang==='es'?'Mensaje enviado ✓':'Message sent ✓';this.style.background='#3B6D11';this.style.color='white'">
+        Send Message
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ================================================
+     FOOTER
+     REPLACE TDLR license number
+     ================================================ -->
+<footer>
+  <div class="footer-logo">Eli Elite Electric</div>
+  <div class="footer-copy"
+       data-en="© 2025 Eli Elite Electric · Houston, TX · TDLR Lic. #550184"
+       data-es="© 2025 Eli Elite Electric · Houston, TX · Licencia TDLR #550184">
+    © 2025 Eli Elite Electric · Houston, TX · TDLR Lic. #550184
+  </div>
+  <div class="footer-links">
+    <a href="#services" data-en="Services" data-es="Servicios">Services</a>
+    <a href="#about"    data-en="About"    data-es="Nosotros">About</a>
+    <a href="#contact"  data-en="Contact"  data-es="Contacto">Contact</a>
+  </div>
+</footer>
+
+<!-- ================================================
+     LANGUAGE SWITCHER — no need to touch this
+     ================================================ -->
+<script>
+let currentLang = 'en';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('lang-splash').classList.add('hidden');
+  applyLang(lang);
+}
+
+function toggleLang() {
+  currentLang = currentLang === 'en' ? 'es' : 'en';
+  applyLang(currentLang);
+}
+
+function applyLang(lang) {
+  document.getElementById('pill-en').classList.toggle('active', lang === 'en');
+  document.getElementById('pill-es').classList.toggle('active', lang === 'es');
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else if (el.tagName === 'OPTION') {
+      el.textContent = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+  document.getElementById('fn-ph').placeholder = lang === 'es' ? 'Juan'   : 'John';
+  document.getElementById('ln-ph').placeholder = lang === 'es' ? 'García' : 'Smith';
+  document.getElementById('ta-ph').placeholder = lang === 'es'
+    ? 'Describe lo que necesitas — ubicación, alcance, urgencia...'
+    : 'Describe what you need — location, scope, any urgency...';
+}
+</script>
+</body>
+</html>
