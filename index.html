@@ -3,16 +3,16 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eli Elite Electric · Houston, TX</title>
+<title>Lujan Electric · Houston, TX</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
-    --navy: #0D1B2A; --navy-mid: #1A2E42; --gold: #C8962A; --gold-light: #E8B84B;
-    --cream: #F7F4EE; --cream-dark: #EDE9E0; --white: #FFFFFF;
-    --text-dark: #0D1B2A; --text-mid: #3A4E62; --text-muted: #6B7E92;
-    --border: rgba(13,27,42,0.12);
+    --navy: #1A1A1D; --navy-mid: #2A2A2E; --gold: #C45D32; --gold-light: #D97851;
+    --cream: #F4F1ED; --cream-dark: #E7E2D9; --white: #FFFFFF;
+    --text-dark: #1A1A1D; --text-mid: #44423F; --text-muted: #6E6B66;
+    --border: rgba(26,26,29,0.12);
     --serif: 'DM Serif Display', Georgia, serif; --sans: 'DM Sans', system-ui, sans-serif;
     --radius: 4px; --radius-lg: 8px;
   }
@@ -29,7 +29,7 @@
   .splash-sub { font-size: 14px; color: rgba(255,255,255,0.4); margin-bottom: 2.5rem; letter-spacing: 0.04em; }
   .lang-btns { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
   .lang-btn { padding: 18px 24px; border: 1px solid rgba(255,255,255,0.15); border-radius: var(--radius-lg); background: rgba(255,255,255,0.05); cursor: pointer; transition: all 0.2s; text-align: left; }
-  .lang-btn:hover { background: rgba(200,150,42,0.15); border-color: var(--gold); }
+  .lang-btn:hover { background: rgba(196,93,50,0.15); border-color: var(--gold); }
   .lang-btn-flag { font-size: 28px; display: block; margin-bottom: 8px; }
   .lang-btn-name { font-family: var(--serif); font-size: 20px; color: var(--white); display: block; margin-bottom: 2px; }
   .lang-btn-native { font-size: 13px; color: rgba(255,255,255,0.4); }
@@ -43,7 +43,7 @@
   .nav-links a { font-size: 14px; font-weight: 400; color: var(--text-mid); text-decoration: none; letter-spacing: .02em; transition: color .2s; }
   .nav-links a:hover { color: var(--navy); }
   .nav-cta { background: var(--navy) !important; color: var(--white) !important; padding: 9px 20px; border-radius: var(--radius); font-weight: 500 !important; font-size: 14px !important; transition: background .2s !important; }
-  .nav-cta:hover { background: var(--gold) !important; color: var(--navy) !important; }
+  .nav-cta:hover { background: var(--gold) !important; color: var(--white) !important; }
   .lang-toggle { display: flex; align-items: center; gap: 6px; background: var(--cream); border: 1px solid var(--cream-dark); border-radius: 20px; padding: 4px; cursor: pointer; transition: all .2s; }
   .lang-toggle:hover { border-color: var(--gold); }
   .lang-pill { padding: 4px 12px; border-radius: 16px; transition: all .2s; font-size: 12px; font-weight: 500; letter-spacing: .03em; }
@@ -53,13 +53,13 @@
   /* HERO */
   #hero { padding-top: 68px; min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; background: var(--navy); overflow: hidden; }
   .hero-left { display: flex; flex-direction: column; justify-content: center; padding: 8vw 5vw 8vw 8vw; }
-  .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; color: var(--gold); text-transform: uppercase; margin-bottom: 2rem; }
-  .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold); }
+  .hero-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 11px; font-weight: 500; letter-spacing: .12em; color: var(--gold-light); text-transform: uppercase; margin-bottom: 2rem; }
+  .hero-tag::before { content: ''; display: block; width: 24px; height: 1px; background: var(--gold-light); }
   .hero-h1 { font-family: var(--serif); font-size: clamp(36px,5vw,66px); line-height: 1.05; color: var(--white); margin-bottom: 1.5rem; }
-  .hero-h1 em { color: var(--gold); font-style: italic; }
+  .hero-h1 em { color: var(--gold-light); font-style: italic; }
   .hero-sub { font-size: 17px; font-weight: 300; color: rgba(255,255,255,0.6); max-width: 400px; line-height: 1.7; margin-bottom: 2.5rem; }
   .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
-  .btn-primary { background: var(--gold); color: var(--navy); font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 14px 28px; border: none; border-radius: var(--radius); cursor: pointer; text-decoration: none; letter-spacing: .02em; transition: background .2s, transform .15s; display: inline-block; }
+  .btn-primary { background: var(--gold); color: var(--white); font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 14px 28px; border: none; border-radius: var(--radius); cursor: pointer; text-decoration: none; letter-spacing: .02em; transition: background .2s, transform .15s; display: inline-block; }
   .btn-primary:hover { background: var(--gold-light); transform: translateY(-1px); }
   .btn-outline { background: transparent; color: rgba(255,255,255,0.75); font-family: var(--sans); font-size: 14px; font-weight: 400; padding: 13px 28px; border: 1px solid rgba(255,255,255,.2); border-radius: var(--radius); cursor: pointer; text-decoration: none; letter-spacing: .02em; transition: border-color .2s, color .2s; display: inline-block; }
   .btn-outline:hover { border-color: rgba(255,255,255,.5); color: var(--white); }
@@ -69,14 +69,14 @@
   .hero-right { position: relative; background: var(--navy-mid); overflow: hidden; display: flex; align-items: center; justify-content: center; }
   .hero-visual { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; padding: 4rem; }
   .circuit-svg { width: 100%; max-width: 400px; opacity: .25; }
-  .hero-badge { position: absolute; bottom: 3rem; right: 3rem; background: var(--gold); color: var(--navy); border-radius: 50%; width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 11px; font-weight: 500; line-height: 1.3; letter-spacing: .03em; }
+  .hero-badge { position: absolute; bottom: 3rem; right: 3rem; background: var(--gold); color: var(--white); border-radius: 50%; width: 110px; height: 110px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; font-size: 11px; font-weight: 500; line-height: 1.3; letter-spacing: .03em; }
   .hero-badge strong { font-family: var(--serif); font-size: 22px; display: block; margin-bottom: 2px; font-weight: 400; }
 
   /* TRUST BAR */
   .trust-bar { background: var(--cream); padding: 1.5rem 8vw; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-bottom: 1px solid var(--cream-dark); }
   .trust-item { display: flex; align-items: center; gap: 10px; font-size: 13px; font-weight: 400; color: var(--text-mid); }
   .trust-icon { width: 30px; height: 30px; background: var(--navy); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .trust-icon svg { width: 14px; height: 14px; fill: var(--gold); }
+  .trust-icon svg { width: 14px; height: 14px; fill: var(--gold-light); }
 
   /* SECTIONS */
   .section { padding: 7rem 8vw; }
@@ -94,8 +94,8 @@
   .service-card:hover .service-title { color: var(--white); }
   .service-card:hover .service-desc { color: rgba(255,255,255,.5); }
   .service-card:hover .service-num { color: rgba(255,255,255,.15); }
-  .service-card:hover .s-icon { background: rgba(200,150,42,.15); }
-  .service-card:hover .s-icon svg { fill: var(--gold); }
+  .service-card:hover .s-icon { background: rgba(196,93,50,.18); }
+  .service-card:hover .s-icon svg { fill: var(--gold-light); }
   .service-num { font-family: var(--serif); font-size: 12px; color: var(--cream-dark); margin-bottom: 1.25rem; letter-spacing: .05em; transition: color .2s; }
   .s-icon { width: 44px; height: 44px; background: var(--cream); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; transition: background .2s; }
   .s-icon svg { width: 20px; height: 20px; fill: var(--navy); transition: fill .2s; }
@@ -113,7 +113,7 @@
   .about-list { margin: 2rem 0; list-style: none; display: flex; flex-direction: column; gap: 1rem; }
   .about-list li { display: flex; align-items: flex-start; gap: 12px; font-size: 15px; color: var(--text-mid); line-height: 1.5; }
   .check { width: 20px; height: 20px; flex-shrink: 0; background: var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 2px; }
-  .check svg { width: 10px; height: 10px; fill: var(--navy); }
+  .check svg { width: 10px; height: 10px; fill: var(--white); }
 
   /* GALLERY */
   #gallery .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: 220px 220px; gap: 12px; }
@@ -122,7 +122,7 @@
   .gal-item:nth-child(4) { grid-column: 2 / 4; }
   .gal-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .4s; }
   .gal-item:hover img { transform: scale(1.04); }
-  .gal-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(13,27,42,.8) 0%, transparent 60%); opacity: 0; transition: opacity .3s; display: flex; align-items: flex-end; padding: 1.25rem; }
+  .gal-overlay { position: absolute; inset: 0; background: linear-gradient(to top, rgba(26,26,29,.8) 0%, transparent 60%); opacity: 0; transition: opacity .3s; display: flex; align-items: flex-end; padding: 1.25rem; }
   .gal-item:hover .gal-overlay { opacity: 1; }
   .gal-label { font-size: 13px; font-weight: 500; color: var(--white); letter-spacing: .03em; }
   .gal-placeholder { display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,.15); }
@@ -133,7 +133,7 @@
   #contact .contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 6vw; align-items: start; }
   .contact-detail { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 1.75rem; }
   .c-icon { width: 40px; height: 40px; flex-shrink: 0; background: var(--navy); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; }
-  .c-icon svg { width: 18px; height: 18px; fill: var(--gold); }
+  .c-icon svg { width: 18px; height: 18px; fill: var(--gold-light); }
   .c-label { font-size: 11px; font-weight: 500; color: var(--text-muted); letter-spacing: .08em; text-transform: uppercase; margin-bottom: 3px; }
   .c-value { font-size: 15px; color: var(--text-dark); font-weight: 400; }
   .contact-form { background: var(--navy); border-radius: var(--radius-lg); padding: 2.5rem; }
@@ -145,7 +145,7 @@
   .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
   .form-group select option { background: var(--navy); color: var(--white); }
   .form-group textarea { resize: vertical; min-height: 110px; line-height: 1.5; }
-  .form-submit { width: 100%; background: var(--gold); color: var(--navy); font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 13px; border: none; border-radius: var(--radius); cursor: pointer; letter-spacing: .03em; transition: background .2s; margin-top: 8px; }
+  .form-submit { width: 100%; background: var(--gold); color: var(--white); font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 13px; border: none; border-radius: var(--radius); cursor: pointer; letter-spacing: .03em; transition: background .2s; margin-top: 8px; }
   .form-submit:hover { background: var(--gold-light); }
   .whatsapp-btn { display: flex; align-items: center; gap: 10px; background: #25D366; color: white; font-family: var(--sans); font-size: 14px; font-weight: 500; padding: 12px 20px; border-radius: var(--radius); text-decoration: none; margin-top: 1rem; transition: background .2s; width: fit-content; }
   .whatsapp-btn:hover { background: #1ebe5a; }
@@ -157,7 +157,7 @@
   .footer-copy { font-size: 13px; color: rgba(255,255,255,.3); }
   .footer-links { display: flex; gap: 1.5rem; }
   .footer-links a { font-size: 13px; color: rgba(255,255,255,.4); text-decoration: none; }
-  .footer-links a:hover { color: var(--gold); }
+  .footer-links a:hover { color: var(--gold-light); }
 
   @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
   .hero-tag   { animation: fadeUp .6s ease both; }
@@ -178,7 +178,7 @@
     <div class="splash-bolt">
       <svg viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/></svg>
     </div>
-    <div class="splash-title">Eli Elite Electric</div>
+    <div class="splash-title">Lujan Electric</div>
     <div class="splash-sub">Houston, TX · Licensed &amp; Insured</div>
     <div class="lang-btns">
       <button class="lang-btn" onclick="setLang('en')">
@@ -203,7 +203,7 @@
     <div class="logo-bolt">
       <svg viewBox="0 0 24 24"><path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/></svg>
     </div>
-    Eli Elite Electric
+    Lujan Electric
   </a>
   <ul class="nav-links">
     <li><a href="#services" data-en="Services"  data-es="Servicios">Services</a></li>
@@ -238,9 +238,9 @@
       </span>
     </h1>
     <p class="hero-sub"
-       data-en="Residential and commercial electrical services done right. Eli Elite Electric brings expertise, reliability, and a clean finish to every job."
-       data-es="Servicios eléctricos residenciales y comerciales hechos como se debe. Eli Elite Electric aporta experiencia, confiabilidad y un acabado impecable en cada trabajo.">
-      Residential and commercial electrical services done right. Eli Elite Electric brings expertise, reliability, and a clean finish to every job.
+       data-en="Residential and commercial electrical services done right. Lujan Electric brings expertise, reliability, and a clean finish to every job."
+       data-es="Servicios eléctricos residenciales y comerciales hechos como se debe. Lujan Electric aporta experiencia, confiabilidad y un acabado impecable en cada trabajo.">
+      Residential and commercial electrical services done right. Lujan Electric brings expertise, reliability, and a clean finish to every job.
     </p>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary" data-en="Request a Quote" data-es="Solicitar Cotización">Request a Quote</a>
@@ -266,7 +266,7 @@
     <div class="hero-visual">
       <!--
         REPLACE THIS WHOLE SVG BLOCK with a real photo:
-        <img src="images/hero-photo.jpg" alt="Eli Elite Electric" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
+        <img src="images/hero-photo.jpg" alt="Lujan Electric" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;">
         Save the photo as: images/hero-photo.jpg
       -->
       <svg class="circuit-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
@@ -289,11 +289,11 @@
         <line x1="100" y1="340" x2="100" y2="280" stroke="white" stroke-width="2"/>
         <circle cx="100" cy="200" r="5" fill="white"/>
         <circle cx="200" cy="120" r="5" fill="white"/>
-        <circle cx="320" cy="160" r="7" fill="#C8962A"/>
+        <circle cx="320" cy="160" r="7" fill="#C45D32"/>
         <circle cx="260" cy="200" r="5" fill="white"/>
         <circle cx="160" cy="280" r="5" fill="white"/>
         <circle cx="320" cy="280" r="5" fill="white"/>
-        <circle cx="100" cy="280" r="7" fill="#C8962A"/>
+        <circle cx="100" cy="280" r="7" fill="#C45D32"/>
         <circle cx="260" cy="280" r="5" fill="white"/>
         <rect x="150" y="170" width="60" height="40" rx="3" fill="none" stroke="white" stroke-width="1.5"/>
         <line x1="160" y1="170" x2="160" y2="165" stroke="white" stroke-width="1.5"/>
@@ -303,7 +303,7 @@
         <line x1="175" y1="210" x2="175" y2="215" stroke="white" stroke-width="1.5"/>
         <line x1="190" y1="210" x2="190" y2="215" stroke="white" stroke-width="1.5"/>
         <text x="180" y="194" fill="white" font-size="9" font-family="monospace" text-anchor="middle" opacity="0.5">MCU</text>
-        <path d="M200 160 L192 185 H200 L190 210 L210 180 H202 Z" fill="#C8962A" opacity="0.9"/>
+        <path d="M200 160 L192 185 H200 L190 210 L210 180 H202 Z" fill="#C45D32" opacity="0.9"/>
       </svg>
     </div>
     <!-- REPLACE star rating once he has real Google reviews to back it up -->
@@ -325,7 +325,6 @@
   </div>
   <div class="trust-item">
     <div class="trust-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14l-4-4 1.41-1.41L11 13.17l6.59-6.59L19 8l-8 8z"/></svg></div>
-
     <span data-en="TDLR Certified · Lic. #550184" data-es="Certificado TDLR · Lic. #550184">TDLR Certified · Lic. #550184</span>
   </div>
   <div class="trust-item">
@@ -344,16 +343,16 @@
 
 <!-- ================================================
      SERVICES
-     Add/remove .service-card blocks to match his real offerings
+     Add/remove .service-card blocks to match real offerings
      ================================================ -->
 <section id="services" class="section">
   <div class="section-header">
     <div class="section-label" data-en="What we do" data-es="Lo que hacemos">What we do</div>
     <h2 class="section-h2" data-en="Services built for homes and businesses" data-es="Servicios para hogares y negocios">Services built for<br>homes and businesses</h2>
     <p class="section-sub"
-       data-en="From simple repairs to full commercial builds — Eli Elite Electric handles it all with the same level of care and precision."
-       data-es="Desde reparaciones simples hasta instalaciones comerciales completas — Eli Elite Electric lo maneja todo con el mismo nivel de cuidado y precisión.">
-      From simple repairs to full commercial builds — Eli Elite Electric handles it all with the same level of care and precision.
+       data-en="From simple repairs to full commercial builds — Lujan Electric handles it all with the same level of care and precision."
+       data-es="Desde reparaciones simples hasta instalaciones comerciales completas — Lujan Electric lo maneja todo con el mismo nivel de cuidado y precisión.">
+      From simple repairs to full commercial builds — Lujan Electric handles it all with the same level of care and precision.
     </p>
   </div>
   <div class="services-grid">
@@ -435,14 +434,14 @@
   <div class="about-grid">
     <div class="about-img-wrap">
       <!--
-        REPLACE THIS BLOCK with his photo once you have it.
+        REPLACE THIS BLOCK with his photo once available.
         Drop the file into the images/ folder and swap in:
-          <img src="images/about-photo.jpg" alt="(His first name), Eli Elite Electric">
+          <img src="images/about-photo.jpg" alt="Lujan, Lujan Electric">
         Then delete the div.about-img-placeholder below.
       -->
       <div class="about-img-placeholder">
         <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-        <span>PHOTO OF ANTONIO HERE</span>
+        <span>PHOTO OF LUJAN HERE</span>
       </div>
       <div class="about-accent"></div>
     </div>
@@ -457,9 +456,9 @@
       </h2>
       <!-- REPLACE: swap both paragraphs with his actual story -->
       <p style="font-size:16px;font-weight:300;color:var(--text-muted);line-height:1.75;margin:1rem 0"
-         data-en="Eli Elite Electric was built on a simple mission: to completely change the standards of the electrical field. That means clean, concentric, consistent work — done efficiently, done professionally, and done at a price that doesn't exclude the people who need it most."
-         data-es="Eli Elite Electric fue fundada con una misión simple: cambiar completamente los estándares del campo eléctrico. Eso significa trabajo limpio, concéntrico y consistente — hecho de manera eficiente, profesional y a un precio que no excluye a quienes más lo necesitan.">
-        Eli Elite Electric was built on a simple mission: to completely change the standards of the electrical field. That means clean, concentric, consistent work — done efficiently, done professionally, and done at a price that doesn't exclude the people who need it most.
+         data-en="Lujan Electric was built on a simple mission: to completely change the standards of the electrical field. That means clean, concentric, consistent work — done efficiently, done professionally, and done at a price that doesn't exclude the people who need it most."
+         data-es="Lujan Electric fue fundada con una misión simple: cambiar completamente los estándares del campo eléctrico. Eso significa trabajo limpio, concéntrico y consistente — hecho de manera eficiente, profesional y a un precio que no excluye a quienes más lo necesitan.">
+        Lujan Electric was built on a simple mission: to completely change the standards of the electrical field. That means clean, concentric, consistent work — done efficiently, done professionally, and done at a price that doesn't exclude the people who need it most.
       </p>
       <p style="font-size:16px;font-weight:300;color:var(--text-muted);line-height:1.75"
          data-en="We're not here to just do a job and move on. We want every customer to feel genuinely blessed by the experience — the kind of quality that speaks for itself, backed by 7 years of hands-on work across Houston."
@@ -478,7 +477,6 @@
         </li>
         <li>
           <div class="check"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41L9 16.17z"/></svg></div>
-          <!-- REPLACE (X) with his actual warranty period -->
           <span data-en="A dedicated crew — not a solo op, not a contractor lottery" data-es="Un equipo dedicado — no un solo operario, no una lotería de contratistas">A dedicated crew — not a solo op, not a contractor lottery</span>
         </li>
         <li>
@@ -487,7 +485,7 @@
         </li>
       </ul>
 
-      <a href="#contact" class="btn-primary" style="color:var(--navy)"
+      <a href="#contact" class="btn-primary" style="color:var(--white)"
          data-en="Work with us" data-es="Trabaja con nosotros">Work with us</a>
     </div>
   </div>
@@ -573,7 +571,7 @@
 <!-- ================================================
      CONTACT
      REPLACE: phone, email, hours, WhatsApp number
-     WhatsApp href format: https://wa.me/18325232994 (country code + number, no dashes)
+     WhatsApp href format: https://wa.me/1XXXXXXXXXX (country code + number, no dashes)
      ================================================ -->
 <section id="contact" class="section section-alt">
   <div class="section-header">
@@ -592,14 +590,14 @@
         <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg></div>
         <div>
           <div class="c-label" data-en="Phone" data-es="Teléfono">Phone</div>
-          <div class="c-value">(832) 523-2994</div><!-- REPLACE -->
+          <div class="c-value">(832) 523-2994</div>
         </div>
       </div>
       <div class="contact-detail">
         <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg></div>
         <div>
           <div class="c-label">Email</div>
-          <div class="c-value">elieliteelectric@gmail.com</div><!-- REPLACE -->
+          <div class="c-value">e.lujanelectric@gmail.com</div>
         </div>
       </div>
       <div class="contact-detail">
@@ -618,7 +616,7 @@
         </div>
       </div>
 
-      <!-- REPLACE href number: wa.me/1 + his 10-digit phone, no dashes -->
+      <!-- REPLACE href number: wa.me/1 + Lujan's 10-digit phone, no dashes -->
       <a class="whatsapp-btn" href="https://wa.me/18325232994" target="_blank">
         <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         <span data-en="Text or WhatsApp us" data-es="Escríbenos por WhatsApp">Text or WhatsApp us</span>
@@ -677,11 +675,11 @@
      REPLACE TDLR license number
      ================================================ -->
 <footer>
-  <div class="footer-logo">Eli Elite Electric</div>
+  <div class="footer-logo">Lujan Electric</div>
   <div class="footer-copy"
-       data-en="© 2025 Eli Elite Electric · Houston, TX · TDLR Lic. #550184"
-       data-es="© 2025 Eli Elite Electric · Houston, TX · Licencia TDLR #550184">
-    © 2025 Eli Elite Electric · Houston, TX · TDLR Lic. #550184
+       data-en="© 2025 Lujan Electric · Houston, TX · TDLR Lic. #550184"
+       data-es="© 2025 Lujan Electric · Houston, TX · Licencia TDLR #550184">
+    © 2025 Lujan Electric · Houston, TX · TDLR Lic. #550184
   </div>
   <div class="footer-links">
     <a href="#services" data-en="Services" data-es="Servicios">Services</a>
